@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace=~{normal/base::layout(~{::section})}>
+<head>
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section>
+		<div class="alert  alert-dismissible fade show ms-3 me-3" th:if="${session.msg}" th:classappend="${session.msg.type}" role="alert">
+            <strong th:text="${session.msg.content}"></strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+		  
+		<div class="card me-3 ms-3">
+		
+			<div class="card-body">	
+				<h1 class="text-center">Your Contacts</h1>
+			</div>
+			
+			<!-- search -->
+			<div class="search-container my-3 mx-2">
+				<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search Contact here"/>
+				<div class="search-result">
+					<!-- result goes here -->
+					<h2>this is search result</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima sit corporis quas esse autem dolorum numquam officia quibusdam! Iste adipisci quod corrupti ratione! Hic quod numquam error quasi id animi aliquam facilis tempore quam odio eius ab consectetur veritatis placeat dolor consequuntur deserunt aspernatur incidunt laudantium reprehenderit! Iusto distinctio veniam labore modi officia ullam error aliquam recusandae unde est odit enim eveniet accusamus omnis quis perferendis suscipit asperiores nemo eaque nam dolore mollitia in quam animi iure. Fugit quo veniam quibusdam impedit assumenda provident quasi distinctio iusto consectetur dolor nihil reprehenderit esse voluptate odit neque asperiores debitis repudiandae est fuga hic. Vel minus veritatis facilis quis fugit quae aliquam quibusdam iusto nesciunt earum labore consectetur aspernatur ullam temporibus dolor numquam nemo illum at a iure incidunt amet nihil. Porro assumenda provident vero impedit beatae magnam temporibus ipsam maxime illum sint ut saepe quibusdam consequatur repellendus ab laboriosam atque! Maxime minima porro qui laborum odit ipsam rerum maiores dolores reiciendis a id voluptatum doloremque modi suscipit molestiae voluptate ut laudantium soluta minus perspiciatis mollitia repudiandae voluptates explicabo atque et officiis consequuntur saepe voluptas distinctio ipsum facilis sint debitis possimus incidunt optio facere praesentium quasi ea ullam consectetur itaque quis architecto ab.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus hic dolores deleniti maiores velit unde reiciendis ratione nam sapiente delectus accusantium ipsam temporibus magni earum sunt necessitatibus consequuntur consectetur veniam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas facilis vero voluptatum atque non cupiditate iure omnis veniam neque illum enim labore maiores debitis in deserunt rem et beatae cumque!</p>
+					
+				</div>
+			</div>
+		
+			
+			<div style="width:100%; border:solid 1px black;"></div>
+			<div class="table-responsive">
+			<table class="table table-striped table-hover ">
+				 <thead >
+				    <tr>
+				      <th scope="col">Contact ID</th>
+				      <th scope="col">Name</th>
+				      <th scope="col">Phone Number</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="e : ${contacts}">
+				      <th scope="row" th:text="${'SCM'+e.cId}">1</th>
+				      <td >
+				      	<img th:src="@{'/img/'+${e.image}}"  class="my_profile_picture" />
+				      <a th:href="@{'/user/'+${e.cId}+'/contact'}">	<span th:text="${e.name}"></span></a>
+				      </td>
+				      <td th:text="${e.phone}"></td>
+				      <td th:text="${e.email}"></td>
+				      <td > 
+					      
+					      <a class="btn-sm btn-success">Update</a>
+					      <a th:onclick="|deleteContact(${e.cId})|" th:href="@{'/user/delete/'+${e.cId}}" class="btn-sm btn-danger">Delete</a>
+				      
+				      </td>
+				    </tr>
+				    
+				  </tbody>
+			</table>
+			</div>
+			<nav aria-label="...">
+  				<ul class="pagination ms-3">
+    				<li th:if="${currentPage!=0}" class="page-item ">
+			      		<a th:href="@{'/user/show-contacts/'+${currentPage-1}}"  class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+			    	</li>
+			    	<li th:classappend="${currentPage==i-1?'active' :''}" th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item">
+			    		<a th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a>
+			    	</li>
+			    	<li th:if="${currentPage+1 !=totalPages}" class="page-item">
+			      		<a th:href="@{'/user/show-contacts/'+${currentPage+1}}"  class="page-link" href="#">Next</a>
+			    	</li>
+			 	 </ul>
+			</nav>
+		</div>
+	</section>
+</body>
+</html>

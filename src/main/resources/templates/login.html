@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace=~{base::layout(~{::section})}>
+<head>
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section>
+		<div class="wrapper bg-white">
+			<div class="h2 text-center">Login </div>
+			<div class="h4 text-muted text-center pt-2">Enter your login
+				details</div>
+			<form class="pt-3" th:action="@{/dologin}" action="#" method="post">
+			<div th:if="${param.error}" class="alert alert-danger"> Invalid User Name and Password</div>
+			<div th:if="${param.logout}" class="alert alert-success">Log out successful</div>
+				<div class="form-group py-2">
+					<div class="input-field">
+						<span class="far fa-user p-2"></span> <input type="text"
+							placeholder="Enter your Email Address" name="username" required class="">
+					</div>
+				</div>
+				<div class="form-group py-1 pb-2">
+					<div class="input-field">
+						<span class="fas fa-lock p-2"></span> <input name="password" type="password"
+							placeholder="Enter your Password" required class="">
+						<button class="btn bg-white text-muted">
+							<span class="far fa-eye-slash"></span>
+						</button>
+					</div>
+				</div>
+				<div class="d-flex align-items-start">
+					<div class="remember">
+						<label class="option text-muted"> Remember me <input
+							type="radio" name="radio"> <span class="checkmark"></span>
+						</label>
+					</div>
+					
+					<div class="ml-auto text-center">
+					
+						<a th:href="@{/forgot}" id="forgot">  Forgot Password?</a>
+					</div>
+				</div>
+				<button class="btn btn-block text-center my-3" >Log
+					in</button>
+				<div class="text-center pt-3 text-muted">
+					Not a member? <a href="/signup">Sign up</a>
+				</div>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

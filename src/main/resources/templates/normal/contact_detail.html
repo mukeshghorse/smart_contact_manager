@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace=~{normal/base::layout(~{::section})}>
+<head>
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section>
+		<div class="card mt-3 me-3 ms-3">
+			<div  class="card-body ">
+				<div class="text-center">
+				<img th:src="@{'/img/'+${contact.image}}" style="height:200px; width:200px; border:2px solid black;" class="my_profile_picture " alt="" />
+				</div>
+				<div class="text-center">
+				<span th:text="${contact.name}+'(' +${contact.secondName}+')'" style="font-size:40px;font-weight:700;" class="text-center"></span>
+				</div>
+			</div>
+			
+				<table class="table table-responsive">
+				  <thead>
+				    <tr>
+				      <th scope="col">#Contact ID</th>
+				      <td th:text="${'SCM'+contact.cId}" scope="col"></td>
+				    </tr>
+				  </thead>
+				 
+				  <tbody>
+				    <tr>
+				      <th  scope="row">Name</th>
+				      <td th:text="${contact.name}" scope="row"></td>
+				      				      
+				    </tr>
+				    <tr>
+				      <th  scope="row">Phone</th>
+				      <td th:text="${contact.phone}" scope="row"></td>				      
+				    </tr>
+				    
+				    <tr>
+				      <th  scope="row">Email</th>
+				      <td th:text="${contact.email}" scope="row"></td>				      
+				    </tr>
+				    
+				    <tr>
+				      <th  scope="row">Work</th>
+				      <td th:text="${contact.work}" scope="row"></td>				      
+				    </tr>
+				    <tr>
+				      <th  scope="row">Description</th>
+				      <td th:text="${contact.description}" scope="row"></td>				      
+				    </tr>
+				    
+				  </tbody>
+				  
+				</table>
+				<div class="container ">
+					<a class="btn btn-success mb-2 " type="submit">Update Contact</a>
+					<a th:href="@{'/user/delete/'+${contact.cId}}" class="btn btn-danger mb-2" type="submit"> Delete Contact</a>
+				</div>
+				
+		</div>
+
+	</section>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace=~{base::layout(~{::section})}>
+<head>
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section>
+
+		<div class="wrapper bg-white">
+			<div class="h2 text-center">Forgot Password</div>
+			<div class="alert alert-secondary" role="alert">OTP send
+				successfully.</div>
+
+			<div class="h4 text-muted  pt-2">Enter OTP</div>
+
+			<form th:action="@{/send-otp}" method="post">
+				<input name="otp" required="required" class="form-control" type="text" placeholder="Enter OTP here" />
+				<button class="btn btn-success mt-3" type="submit">Verify</button>
+			</form>
+
+		</div>
+	</section>
+</body>
+</html>
